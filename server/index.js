@@ -6,15 +6,16 @@ const { OpenAI } = require('openai');
 const path = require('path');
 require('dotenv').config();
 
-// Configure upload destination
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+// Configure upload destination (use /tmp for serverless environments)
+const uploadDir = process.env.NODE_ENV === 'production' ? '/tmp' : path.join(__dirname, 'uploads');
+const upload = multer({ dest: uploadDir });
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Ensure uploads directory exists
-if (!fs.existsSync(path.join(__dirname, 'uploads'))) {
+// Ensure uploads directory exists (for local development)
+if (process.env.NODE_ENV !== 'production' && !fs.existsSync(path.join(__dirname, 'uploads'))) {
   fs.mkdirSync(path.join(__dirname, 'uploads'));
 }
 
@@ -36,7 +37,7 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
 app.post('/api/transcribe', async (req, res) => {
   const { fileId } = req.body;
   if (!fileId) return res.status(400).json({ error: 'fileId required' });
-  const filePath = path.join(__dirname, 'uploads', fileId);
+  const filePath = path.join(uploadDir, fileId);
   try {
     const transcription = await openai.audio.transcriptions.create({
       file: fs.createReadStream(filePath),

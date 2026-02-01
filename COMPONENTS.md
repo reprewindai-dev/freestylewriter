@@ -58,13 +58,25 @@ See the main [README.md](README.md) for setup instructions.
 
 ## Deployment Configuration
 
-The `vercel.json` file is currently configured for the simple static site. To deploy the full-stack application instead, you would need to update `vercel.json` to:
+The `vercel.json` file is **currently configured for the full-stack application**:
 
-1. Build the React client: `cd client && npm install && npm run build`
-2. Set output directory to: `client/dist`
-3. Configure API routes to the serverless functions in `/api`
+- Builds the React client: `cd client && npm install && npm run build`
+- Output directory: `client/dist`
+- API routes configured to serverless functions in `/api`
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for the full-stack app deployment guide.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for the full deployment guide.
+
+### Deploying the Simple Text Editor Instead
+
+If you want to deploy only the simple text editor (root-level HTML/CSS/JS files), update `vercel.json`:
+
+```json
+{
+  "version": 2,
+  "outputDirectory": ".",
+  "buildCommand": null
+}
+```
 
 ---
 
