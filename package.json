@@ -1,0 +1,26 @@
+{
+  "name": "freestyle-writer",
+  "version": "1.0.0",
+  "description": "Turn your freestyles into polished song lyrics automatically",
+  "scripts": {
+    "install:all": "cd server && npm install && cd ../client && npm install",
+    "dev:server": "cd server && npm start",
+    "dev:client": "cd client && npm run dev",
+    "build": "cd client && npm install && npm run build",
+    "vercel-build": "cd client && npm install && npm run build"
+  },
+  "keywords": [
+    "freestyle",
+    "lyrics",
+    "music",
+    "openai",
+    "transcription",
+    "songwriting"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reprewindai-dev/freestylewriter"
+  }
+}
