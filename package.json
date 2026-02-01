@@ -1,0 +1,24 @@
+{
+  "name": "freestyle-writer",
+  "version": "1.0.0",
+  "description": "A beautiful, distraction-free writing application with iCloud Drive sync support",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "preview": "python -m http.server 8000"
+  },
+  "keywords": [
+    "writing",
+    "editor",
+    "icloud",
+    "notes",
+    "markdown",
+    "productivity"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reprewindai-dev/freestylewriter"
+  }
+}
