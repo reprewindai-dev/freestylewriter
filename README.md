@@ -1,163 +1,63 @@
 # Freestyle Writer
 
-A beautiful, distraction-free writing application built with vanilla HTML, CSS, and JavaScript. Perfect for creative writing, note-taking, brainstorming, or any kind of freeform text composition.
+## Overview
 
-## Features
+Freestyle Writer is a simple proof‑of‑concept application designed to turn your freestyles into polished song lyrics automatically.  
+It consists of a Node/Express backend that handles file uploads, speech‑to‑text transcription via the OpenAI API, and lyric generation using GPT‑4.  
+The frontend is a React/Tailwind web application built with Vite that records audio in the browser, uploads it to the backend and displays the generated song sheet.
 
-- **Clean, Modern Interface** - Dark theme optimized for long writing sessions
-- **Real-time Statistics** - Track word count and character count as you type
-- **Auto-save** - Your work is automatically saved to local storage
-- **Download** - Export your text as a `.txt` file with timestamp
-- **Copy to Clipboard** - Quickly copy all your text with one click
-- **Keyboard Shortcuts** - Efficient keyboard-based workflow
-- **Responsive Design** - Works beautifully on desktop, tablet, and mobile
-- **Distraction-Free** - Minimal UI that gets out of your way
+> **Note**: In this starter project the web client records audio while the page stays in the foreground.  
+> Background recording (switching apps on mobile) requires a native wrapper such as Capacitor and isn’t implemented here.
 
-## Getting Started
+### Features
 
-### Quick Start
+* One‑tap record/stop in the browser
+* Uploads your recording to the backend
+* Transcribes the freestyle to text using OpenAI’s Whisper
+* Generates a polished, structured song sheet (Intro/Verse/Hook/etc.)
+* Two rewrite modes: **More like me** (light edit) and **More polished** (heavier rewrite)
 
-1. Clone this repository:
-   ```bash
-   git clone <repository-url>
-   cd <repository-name>
+### Running the application
+
+This project is split into two packages: `server` and `client`.  Each has its own `package.json`.
+
+1. **Install dependencies**
+
+   ```sh
+   cd freestyle-writer
+   # install backend deps
+   cd server && npm install && cd ..
+   # install frontend deps
+   cd client && npm install
    ```
 
-2. Open `index.html` in your web browser:
-   ```bash
-   open index.html
+2. **Set up environment variables**
+
+   Create a `.env` file in `server` based off `.env.example` and set your `OPENAI_API_KEY`.
+
+3. **Run the backend**
+
+   ```sh
+   cd freestyle-writer/server
+   npm start
    ```
-   Or simply double-click the `index.html` file.
 
-That's it! No build process, no dependencies, no server required.
+   The API will be available on `http://localhost:3000`.
 
-### Live Server (Optional)
+4. **Run the frontend**
 
-For development, you can use a live server:
+   In another terminal:
 
-```bash
-# Using Python 3
-python -m http.server 8000
+   ```sh
+   cd freestyle-writer/client
+   npm run dev
+   ```
 
-# Using Node.js (if you have http-server installed)
-npx http-server
+   Vite will serve the React app at `http://localhost:5173` by default.
 
-# Using PHP
-php -S localhost:8000
-```
+### Future improvements
 
-Then navigate to `http://localhost:8000` in your browser.
-
-## Usage
-
-### Writing
-
-- Click in the text area or press any key to start writing
-- Your work is automatically saved to your browser's local storage
-- Statistics (word and character count) update in real-time
-
-### Buttons
-
-- **Download** - Save your text as a file with a timestamped filename
-- **Copy** - Copy all text to your clipboard
-- **Clear** - Clear all text (with confirmation prompt)
-
-### Keyboard Shortcuts
-
-- `Ctrl/Cmd + S` - Download text as file
-- `Ctrl/Cmd + K` - Clear editor (with confirmation)
-
-## Technical Details
-
-### Browser Compatibility
-
-Works in all modern browsers:
-- Chrome/Edge (version 90+)
-- Firefox (version 88+)
-- Safari (version 14+)
-- Opera (version 76+)
-
-### Local Storage
-
-The application uses the browser's `localStorage` API to persist your writing between sessions. Your data stays on your device and is never sent to any server.
-
-### File Structure
-
-```
-freestyle-writer/
-├── index.html      # Main HTML structure
-├── styles.css      # Styling and theme
-├── script.js       # Application logic
-└── README.md       # Documentation
-```
-
-## Customization
-
-### Changing the Theme
-
-Edit `styles.css` and modify the CSS variables in the `:root` selector:
-
-```css
-:root {
-    --bg-primary: #1e1e1e;      /* Main background */
-    --bg-secondary: #2d2d2d;    /* Header background */
-    --text-primary: #e0e0e0;    /* Main text color */
-    --accent: #007acc;          /* Accent color */
-    /* ... more variables ... */
-}
-```
-
-### Changing Fonts
-
-The editor uses Georgia (serif) for a classic writing feel. To change it, modify the `.editor` class in `styles.css`:
-
-```css
-.editor {
-    font-family: 'Your Font Here', serif;
-}
-```
-
-## Features in Detail
-
-### Auto-save
-
-Your work is saved automatically:
-- On every keystroke (debounced)
-- Every 30 seconds (automatic interval)
-- When you close the browser tab
-
-### Download Format
-
-Downloaded files are named with the pattern:
-```
-freestyle_writer_YYYY-MM-DD_HH-MM-SS.txt
-```
-
-For example: `freestyle_writer_2026-02-01_14-30-45.txt`
-
-## Privacy
-
-- **No tracking** - Zero analytics or tracking scripts
-- **No server** - Everything runs locally in your browser
-- **No data collection** - Your writing stays on your device
-- **Open source** - Full transparency of the code
-
-## Contributing
-
-Contributions are welcome! Feel free to:
-- Report bugs
-- Suggest new features
-- Submit pull requests
-- Improve documentation
-
-## License
-
-This project is open source and available under the MIT License.
-
-## Support
-
-If you encounter any issues or have questions, please open an issue on the repository.
-
----
-
-**Happy Writing! ✍️**
+* Background recording support via a native wrapper (e.g. Capacitor for iOS)
+* Additional endpoints for generating alternative hooks, shortening verses and exporting PDF/TXT song sheets
+* User authentication and file persistence (currently uploads are stored on disk in the `uploads/` folder)
+* UI polish and responsive design
