@@ -1,19 +1,21 @@
 {
   "name": "freestyle-writer",
   "version": "1.0.0",
-  "description": "A beautiful, distraction-free writing application with iCloud Drive sync support",
-  "main": "index.html",
+  "description": "Turn your freestyles into polished song lyrics automatically",
   "scripts": {
-    "dev": "python -m http.server 8000",
-    "preview": "python -m http.server 8000"
+    "install:all": "cd server && npm install && cd ../client && npm install",
+    "dev:server": "cd server && npm start",
+    "dev:client": "cd client && npm run dev",
+    "build": "cd client && npm install && npm run build",
+    "vercel-build": "cd client && npm install && npm run build"
   },
   "keywords": [
-    "writing",
-    "editor",
-    "icloud",
-    "notes",
-    "markdown",
-    "productivity"
+    "freestyle",
+    "lyrics",
+    "music",
+    "openai",
+    "transcription",
+    "songwriting"
   ],
   "author": "",
   "license": "MIT",

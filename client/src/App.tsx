@@ -49,18 +49,18 @@ export default function App() {
     const formData = new FormData();
     formData.append('file', blob, 'recording.webm');
     try {
-      // Upload the recording
-      const uploadRes = await axios.post('http://localhost:3000/api/upload', formData, {
+      // Upload the recording (use relative URL for both dev and production)
+      const uploadRes = await axios.post('/api/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       const fileId = uploadRes.data.fileId;
 
       // Transcribe
-      const transRes = await axios.post('http://localhost:3000/api/transcribe', { fileId });
+      const transRes = await axios.post('/api/transcribe', { fileId });
       const transcript: string = transRes.data.transcript;
 
       // Build lyrics
-      const buildRes = await axios.post<SongResponse>('http://localhost:3000/api/build-lyrics', {
+      const buildRes = await axios.post<SongResponse>('/api/build-lyrics', {
         transcript,
         mode,
       });

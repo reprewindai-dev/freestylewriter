@@ -104,8 +104,13 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Freestyle Writer server running on port ${PORT}`);
-});
+// Export for Vercel serverless functions
+module.exports = app;
+
+// Start the server (only for local development)
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Freestyle Writer server running on port ${PORT}`);
+  });
+}
