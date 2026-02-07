@@ -1,13 +1,11 @@
 {
-  "name": "freestyle-writer",
+  "name": "freestyle-writer-client",
   "version": "1.0.0",
-  "description": "Turn your freestyles into polished song lyrics automatically",
+  "private": true,
   "scripts": {
-    "install:all": "cd server && npm install && cd ../client && npm install",
-    "dev:server": "cd server && npm start",
-    "dev:client": "cd client && npm run dev",
-    "build": "cd client && npm install && npm run build",
-    "vercel-build": "cd client && npm install && npm run build"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "cors": "^2.8.5",
